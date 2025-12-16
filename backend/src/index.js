@@ -22,7 +22,15 @@ app.use((req, res, next) => {
 });
 
 const path = require('path');
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+const fs = require('fs');
+
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, '..', 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+app.use('/uploads', express.static(uploadsDir));
 
 // Routes
 const logsRoutes = require('./routes/logs.routes');
