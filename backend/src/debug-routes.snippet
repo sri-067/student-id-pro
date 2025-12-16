@@ -1,0 +1,9 @@
+﻿/*
+  DEBUG ROUTES - temporary for testing JSON parsing and routing.
+  Remove these lines after debugging.
+*/
+app.get("/__ping", (req, res) => res.json({ ok: true, time: new Date().toISOString() }));
+app.post("/__echo", (req, res) => {
+  // echo received body and headers so we can inspect what arrived
+  res.json({ gotBody: req.body, gotHeaders: req.headers });
+});
