@@ -54,10 +54,15 @@ const verifyLimiter = rateLimit({
 app.use('/verify', verifyLimiter);
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
+
+console.log('Starting server...');
+console.log('PORT:', PORT);
+console.log('MONGO_URI exists:', !!MONGO_URI);
 
 if (!MONGO_URI) {
-  console.error('Missing MONGO_URI in .env');
+  console.error('Missing MONGO_URI in environment variables');
+  console.error('Available env vars:', Object.keys(process.env).filter(k => k.includes('MONGO')));
   process.exit(1);
 }
 

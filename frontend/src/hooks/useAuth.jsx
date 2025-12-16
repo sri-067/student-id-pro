@@ -41,7 +41,9 @@ export function AuthProvider({ children }) {
 
       return true;
     } catch (err) {
-      alert(err.response?.data?.error || "Login failed");
+      const errorMsg = err.response?.data?.error || err.message || "Login failed";
+      alert(errorMsg);
+      console.error('Login error:', err);
       return false;
     } finally {
       // 🔥 THIS WAS MISSING / NOT RUNNING
