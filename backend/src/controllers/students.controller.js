@@ -22,6 +22,9 @@ async function createStudent(req, res, next) {
 
     if (req.file) {
       student.photoUrl = `${process.env.APP_URL.replace(/\/$/, '')}/uploads/${req.file.filename}`;
+    } else {
+      // Default placeholder image
+      student.photoUrl = 'https://via.placeholder.com/150x150/4F46E5/FFFFFF?text=Student';
     }
 
     const qrId = createQrId();
